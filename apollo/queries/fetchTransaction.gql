@@ -1,0 +1,19 @@
+query transactions {
+  transactions{
+     id
+    bot {
+      id
+      name
+    }
+    coin {
+      id
+      name
+      abbrev
+    }
+    coinQuantity
+    contemporaryCoinPrice
+    name
+    transactionDateTime
+    profit
+  }
+}

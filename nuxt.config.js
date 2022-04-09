@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/directives.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,20 +42,33 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/apollo'
   ],
 
   axios: {
     baseUrl: process.env.API_URL,
     headers: {
       common: {
-        "X-MBX-APIKEY": process.env.API_KEY
+        "X-MBX-APIKEY": process.env.BRETT_API_KEY
+      }
+    }
+  },
+  // apollo: {
+  //   clientConfigs: {
+  //     default: '~/apollo/client-configs/default.js'
+  //   }
+  // },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://crypto-bots-back.herokuapp.com/graphql'
       }
     }
   },
   publicRuntimeConfig: {
     // need to double check the security here
-    secretKey: process.env.SECRET_KEY
+    secretKey: process.env.BRETT_SECRET_KEY
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
