@@ -1,12 +1,18 @@
 <template>
   <div>
-  <p>hello</p>
-  {{ path }}
-  {{ profitsByUserAndBot}}
-  <LineChart
-    :chart-labels="chartLabels"
-    :chart-data="chartData"
-  />
+    <div
+      v-if="botData.length && marketData.length"
+    >
+      <LineChart
+        v-for="coin in coinsTraded"
+        :key="coin"
+        :chart-labels="mapDatesForXAxis(filterProfitsByCoin(coin, botData))"
+        :chart-data="mapProfitsForYAxis(filterProfitsByCoin(coin, botData))"
+        :label-one="coin"
+        :chart-data-two="mapProfitsForYAxis(filterProfitsByCoin(coin, marketData))"
+        label-two="Market Profit"
+      />
+    </div>
   </div>
 </template>
 
@@ -16,14 +22,9 @@ import { profitsByUserAndBot } from '~/apollo/queries/fetchProfits'
 export default {
   data() {
     return {
-      profitsByUserAndBot: [],
-      chartData: {
-          datasets: [{
-            label: 'Title',
-            data: [45, 55, 48, 35, 12]
-          }]
-        },
-      chartLabels: [2, 3]
+      botData: [],
+      marketData: [],
+      coinsTraded: ['Bitcoin', 'Ethereum', 'Litecoin']
     }
   },
   computed: {
@@ -31,13 +32,34 @@ export default {
       return this.$route.path.split('/')[2]
     }
   },
+  methods: {
+    filterProfitsByCoin(coinName, data) {
+      return data.filter(obj => obj.coin.name === coinName)
+    },
+    mapDatesForXAxis(profitsByCoinArray) {
+      return profitsByCoinArray.map(x => x.date).sort()
+    },
+    mapProfitsForYAxis(profitsByCoinArray) {
+      return profitsByCoinArray.map(x => x.profit)
+    }
+
+  },
   apollo: {
-    profitsByUserAndBot: {
+    botData: {
       query: profitsByUserAndBot,
       variables() {
         return {
           username: 'mockuser',
           botname: this.$route.path.split('/')[this.$route.path.split('/').length - 1]
+        }
+      }
+    },
+    marketData: {
+      query: profitsByUserAndBot,
+      variables() {
+        return {
+          username: 'mockuser',
+          botname: 'mockmarketbot'
         }
       }
     }

@@ -7,13 +7,25 @@ export default {
   extends: Line,
   props: {
     chartData: {
-      type: Object,
-      required: false
+      type: Array,
+      required: true
+    },
+    labelOne: {
+      type: String,
+      required: true
     },
     chartLabels: {
       type: Array,
       required: true
-    }
+    },
+    chartDataTwo: {
+      type: Array,
+      required: false
+    },
+    labelTwo: {
+      type: String,
+      required: false
+    },
   },
   data () {
       return {
@@ -46,13 +58,22 @@ export default {
         labels: this.chartLabels,
         datasets: [
           {
-            label: 'downloads',
+            label: this.labelOne,
             borderColor: '#249EBF',
             pointBackgroundColor: 'white',
-            borderWidth: 1,
+            borderWidth: 5,
             pointBorderColor: '#249EBF',
             backgroundColor: 'transparent',
             data: this.chartData
+          },
+          {
+            label: this.labelTwo,
+            borderColor: '#FF0000',
+            pointBackgroundColor: 'white',
+            borderWidth: 5,
+            pointBorderColor: '#FF0000',
+            backgroundColor: 'transparent',
+            data: this.chartDataTwo
           }
         ]
       }, this.options)
