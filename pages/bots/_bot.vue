@@ -2,7 +2,9 @@
   <div>
     <div
       v-if="botData.length && marketData.length"
+      class="p-4"
     >
+      <h2 class="text-2xl"> Bot: <span class="uppercase">{{ path}}</span></h2>
       <LineChart
         v-for="coin in coinsTraded"
         :key="coin"
