@@ -1,0 +1,35 @@
+query profitsByUserAndBot(
+  $username: String!
+  $botname: String!
+  ){
+    botData: profitsByUserAndBot (
+      username: $username
+      botname: $botname
+    ){
+      id
+      date
+      bot {
+        name
+        title
+      }
+      coin {
+        name
+      }
+      profit
+    },
+    marketData: profitsByUserAndBot (
+      username: $username
+      botname: $botname
+    ){
+      id
+      date
+      bot {
+        name
+        title
+      }
+      coin {
+        name
+      }
+      profit
+    }
+  }

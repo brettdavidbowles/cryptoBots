@@ -1,0 +1,7 @@
+query botsByUser($username: String!) {
+  botsByUser (username: $username) {
+    name
+    title
+    url
+    }
+  }
