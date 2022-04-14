@@ -1,6 +1,9 @@
 <template>
-  <div class="bg-black sticky top-0 text-white w-full flex justify-between p-4"
+  <div class="bg-black sticky top-0 text-white w-full flex justify-between py-4 px-8"
   >
+    <nuxt-link to="/">
+     Home
+    </nuxt-link>
     <Dropdown
       :links="botsSansMarketBot"
       title="Bots" 

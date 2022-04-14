@@ -26,10 +26,23 @@ export default {
       type: String,
       required: false
     },
+    title: {
+      type: String,
+      required: false
+    }
   },
   data () {
       return {
         options: {
+          plugins: {
+            title: {
+              display: true,
+              text: this.title,
+              font: {
+                size: 18
+              }
+            }
+          },
           scales: {
             yAxes: {
               ticks: {
@@ -59,10 +72,10 @@ export default {
         datasets: [
           {
             label: this.labelOne,
-            borderColor: '#249EBF',
+            borderColor: '#355E3B',
             pointBackgroundColor: 'white',
             borderWidth: 5,
-            pointBorderColor: '#249EBF',
+            pointBorderColor: '#355E3B',
             backgroundColor: 'transparent',
             data: this.chartData
           },

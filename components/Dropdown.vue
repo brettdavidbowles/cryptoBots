@@ -7,11 +7,12 @@
     {{ title }}
     <div 
       v-if="isExpanded"
-      class="absolute bg-black p-2"
+      class="absolute bg-black p-2 -mx-4"
     >
       <div 
         v-for="link in links"
         :key="link.url"
+        class="p-2"
       >
         <nuxt-link
           v-if="link.url"
