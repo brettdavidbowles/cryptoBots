@@ -16,7 +16,7 @@
         <option>LTCUSDT</option>
         <option>ETHUSDT</option>
       </select>
-      <table>
+      <table class="mt-8">
         <colgroup>
           <col style="border:4px solid">
           <col style="border:4px solid">
@@ -33,7 +33,7 @@
             <th
             v-for="(heading, index) in columnHeadings"
             :key="index" 
-            style="position:sticky; top:0;"
+            style="position:sticky; top:5rem; background-color:white"
             >
               {{heading}}
             </th>
