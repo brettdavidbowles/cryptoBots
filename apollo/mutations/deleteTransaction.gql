@@ -1,0 +1,9 @@
+mutation deleteTransaction (
+  $id: ID!
+  ){
+    DeleteTransaction: deleteTransaction (
+      id: $id
+    ){
+      ok
+      }
+    }

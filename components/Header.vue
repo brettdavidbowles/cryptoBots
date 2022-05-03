@@ -33,9 +33,9 @@ export default {
   data() {
       return {
           links: [
-              { title: "All Transactions", url: "allTransactions" },
-              { title: "About", url: "about" },
-              { title: "Bio", url: "bio" }
+              { title: "All Transactions", url: "/allTransactions" },
+              { title: "About", url: "/about" },
+              { title: "Bio", url: "/bio" }
           ],
           botsByUser: []
       }

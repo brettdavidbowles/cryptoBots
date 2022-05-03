@@ -5,7 +5,7 @@
       v-if="botData.length && marketData.length"
       class="p-4"
     >
-      <h2 class="text-2xl"> Bot: <span class="uppercase">{{ path}}</span></h2>
+      <h2 class="text-2xl"> Bot: <span class="uppercase">{{ path }}</span></h2>
       <LineChart
         v-for="coin in coinsTraded"
         :key="coin"
@@ -22,7 +22,6 @@
 
 <script>
 import { profitsByUserAndBot } from '~/apollo/queries/fetchProfits'
-import Header from '../../components/Header.vue'
 
 export default {
     data() {
@@ -67,7 +66,6 @@ export default {
                 };
             }
         }
-    },
-    components: { Header }
+    }
 }
 </script>

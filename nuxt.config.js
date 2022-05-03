@@ -47,12 +47,12 @@ export default {
   ],
 
   axios: {
-    baseUrl: process.env.API_URL,
-    headers: {
-      common: {
-        "X-MBX-APIKEY": process.env.BRETT_API_KEY
-      }
-    }
+    baseUrl: process.env.BEM_API_URL,
+    // headers: {
+    //   common: {
+    //     "X-MBX-APIKEY": process.env.BEM_API_KEY
+    //   }
+    // }
   },
   // apollo: {
   //   clientConfigs: {
@@ -68,7 +68,7 @@ export default {
   },
   publicRuntimeConfig: {
     // need to double check the security here
-    secretKey: process.env.BRETT_SECRET_KEY
+    secretKey: process.env.BINANCE_SECRET_KEY
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

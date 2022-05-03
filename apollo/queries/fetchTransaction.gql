@@ -17,3 +17,22 @@ query transactions {
     profit
   }
 }
+
+query transactionsByBot (
+  $botName: String!
+  ){
+    TransactionsByBot: transactionsByBot (
+      botName: $botName
+    ){
+      id
+      coin {
+      abbrev
+      }
+      quantity
+      boughtPrice
+      sellPrice
+      currentPrice
+      dateTime
+      transactionProfit
+      }
+    }
