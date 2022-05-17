@@ -17,10 +17,10 @@
           <option>ETHUSDT</option>
         </select>
         <div>
-        <div class="h-screen overflow-auto">
-          <table id="chart" class="relative w-full" v-if="selectedCoin">
+        <div class="h-screen overflow-auto bg-blue-100">
+          <table id="chart" class="relative w-full" v-if="!loading && selectedCoin">
             <colgroup>
-              <col style="border:4px solid" class="bg-white">
+              <col>
               <col style="border:4px solid">
               <col style="border:4px solid">
               <col style="border:4px solid">
@@ -42,7 +42,7 @@
                 <th
                 v-for="(heading, index) in columnHeadings"
                 :key="index" 
-                class="bg-white"
+                class="bg-black text-white"
                 :class="[ index === 0 ? 'sticky left-0' : '']"
                 >
                   {{heading}}
@@ -55,7 +55,7 @@
               style="border:4px solid"
               class=""
               >
-                  <td class="sticky left-0 bg-white">{{ transaction.id }}</td>
+                  <td class="sticky left-0 bg-black text-white">{{ transaction.id }}</td>
                   <td>{{ transaction.dateTime.slice(0, 19) }}</td>
                   <td>{{ transaction.coin.abbrev }}</td>
                   <td>{{ transaction.quantity }}</td>
@@ -70,6 +70,9 @@
                   <!-- <span>{{ transaction.coin.abbrev }}</span> -->
               </tr>
           </table>
+          <span v-else-if="loading && selectedCoin">
+            It's loading... please relax... it's a free server... breathe in breathe out
+          </span>
         </div>
         </div>
       </div>
@@ -86,7 +89,8 @@ export default {
     return {
       TransactionsByBot: [],
       columnHeadings: [ 'ID', 'Date/Time', 'Coin', 'Quantity', 'Bought Price', 'Sell Price', 'Current Price', 'Transaction Profit', 'Cumulative Profit', 'Market Cumulative Profit', 'Market Percent Profit'],
-      selectedCoin: ''
+      selectedCoin: '',
+      loading: 0
     }
   },
   computed: {
@@ -104,6 +108,7 @@ export default {
     }
   },
   apollo: {
+    $loadingKey: 'loading',
     TransactionsByBot: {
       query: transactionsByBot,
       variables() {
