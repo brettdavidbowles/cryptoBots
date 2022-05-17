@@ -34,5 +34,7 @@ query transactionsByBot (
       currentPrice
       dateTime
       transactionProfit
+      marketCumulativeProfit
+	  	marketPercentProfit
       }
     }
