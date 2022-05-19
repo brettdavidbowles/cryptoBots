@@ -33,7 +33,7 @@ export default {
   data() {
       return {
           links: [
-              { title: "All Transactions", url: "/allTransactions" },
+              // { title: "All Transactions", url: "/allTransactions" },
               { title: "About", url: "/about" },
               { title: "Bio", url: "/bio" }
           ],
@@ -46,7 +46,7 @@ export default {
       prefetch: true,
       variables() {
         return {
-          username: 'mockuser'
+          username: 'kenny'
         }
       }
     }

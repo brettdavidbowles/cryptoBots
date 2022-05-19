@@ -1,6 +1,9 @@
 <template>
   <div class="bg-blue-100 w-full">
     <Header />
+    <h1 class="w-full text-center text-2xl font-bold p-4">
+      {{ $route.params.bot }}
+    </h1>
     <div class="p-4 w-full">
       <select v-model="selectedCoin">
         <option disabled value="">Please select one</option>
@@ -105,7 +108,7 @@ export default {
       query: transactionsByBot,
       variables() {
         return {
-          botName: "CrossNN"
+          botName: this.$route.params.bot
         }
       }
     }

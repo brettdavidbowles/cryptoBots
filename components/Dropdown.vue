@@ -15,8 +15,8 @@
         class="p-2"
       >
         <nuxt-link
-          v-if="link.url"
-          :to="link.url"
+          v-if="link.name"
+          :to="link.name"
         >
           {{ link.title }}
         </nuxt-link>
