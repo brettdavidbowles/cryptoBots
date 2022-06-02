@@ -1,0 +1,39 @@
+mutation createTransactionCalculations(
+  $id: ID!
+  $transactionProfit: Float
+  $cumulativeProfit: Float
+  $transactionExpense: Float
+  $cumulativeExpense: Float
+  $transactionProfitMargin: Float
+  $cumulativeProfitMargin: Float
+  $marketProfitMargin: Float
+  ){
+    CreateTransactionCalculations: createTransactionCalculations (
+      inputData: {
+        transaction: {
+          id: $id
+        }
+        transactionProfit: $transactionProfit
+        cumulativeProfit: $cumulativeProfit
+        transactionExpense: $transactionExpense
+        cumulativeExpense: $cumulativeExpense
+        transactionProfitMargin: $transactionProfitMargin
+        cumulativeProfitMargin: $cumulativeProfitMargin
+        marketProfitMargin: $marketProfitMargin
+
+      }
+    ){
+      transactionCalculations{
+        transaction{
+          id
+        }
+        transactionProfit
+        cumulativeProfit
+        transactionExpense
+        cumulativeExpense
+        transactionProfitMargin
+        cumulativeProfitMargin
+        marketProfitMargin
+      }
+      }
+    }

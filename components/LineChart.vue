@@ -73,18 +73,18 @@ export default {
           {
             label: this.labelOne,
             borderColor: '#355E3B',
-            pointBackgroundColor: 'white',
-            borderWidth: 5,
-            pointBorderColor: '#355E3B',
+            pointBackgroundColor: '#355E3B',
+            borderWidth: 2,
+            pointBorderColor: 'transparent',
             backgroundColor: 'transparent',
             data: this.chartData
           },
           {
             label: this.labelTwo,
             borderColor: '#FF0000',
-            pointBackgroundColor: 'white',
-            borderWidth: 5,
-            pointBorderColor: '#FF0000',
+            pointBackgroundColor: '#FF0000',
+            borderWidth: 2,
+            pointBorderColor: 'transparent',
             backgroundColor: 'transparent',
             data: this.chartDataTwo
           }

@@ -38,3 +38,25 @@ query transactionsByBot (
 	  	marketPercentProfit
       }
     }
+query transactionsByBotAndCoin (
+  $botName: String!
+  $coinAbbrev: String!
+  ){
+    TransactionsByBotAndCoin: transactionsByBotAndCoin (
+      botName: $botName
+      coinAbbrev: $coinAbbrev
+    ){
+      id
+      coin {
+      abbrev
+      }
+      quantity
+      boughtPrice
+      sellPrice
+      currentPrice
+      dateTime
+      transactionProfit
+      marketCumulativeProfit
+	  	marketPercentProfit
+      }
+    }

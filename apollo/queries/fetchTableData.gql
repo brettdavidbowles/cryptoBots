@@ -1,0 +1,26 @@
+query tableData (
+  $botName: String!
+  $coinAbbrev: String!
+  $username: String!
+  ){
+    TableData: tableData (
+      botName: $botName
+      coinAbbrev: $coinAbbrev
+      username: $username
+      ){
+        id
+        dateTime
+        coin {
+          abbrev
+        }
+        quantity
+        boughtPrice
+        sellPrice
+        currentPrice
+        transactioncalculations {
+          transactionProfitMargin
+          cumulativeProfitMargin
+          marketProfitMargin
+        }
+      }
+    }
