@@ -1,5 +1,7 @@
 mutation createTransactionCalculations(
   $id: ID!
+  $transactionRevenue: Float
+  $cumulativeRevenue: Float
   $transactionProfit: Float
   $cumulativeProfit: Float
   $transactionExpense: Float
@@ -13,6 +15,8 @@ mutation createTransactionCalculations(
         transaction: {
           id: $id
         }
+        transactionRevenue: $transactionRevenue
+        cumulativeRevenue: $cumulativeRevenue
         transactionProfit: $transactionProfit
         cumulativeProfit: $cumulativeProfit
         transactionExpense: $transactionExpense
@@ -27,6 +31,8 @@ mutation createTransactionCalculations(
         transaction{
           id
         }
+        transactionRevenue
+        cumulativeRevenue
         transactionProfit
         cumulativeProfit
         transactionExpense

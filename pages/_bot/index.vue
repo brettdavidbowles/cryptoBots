@@ -4,7 +4,10 @@
     <h1 class="w-full text-center text-2xl font-bold p-4">
       {{ $route.params.bot }}
     </h1>
-    <span>please check my math... profit margins seem wrong but it's late here and will have to wait</span>
+    <div>please check my math... profit margins seem wrong but it's late here and will have to wait</div>
+    <div>6/3 i think i fixed them but still hit me up to confirm my methodology</div>
+    <div>6/4 I reversed the table so the newest transactions are first</div>
+    
     <div class="p-4 w-full">
       <select v-model="selectedCoin">
         <option disabled value="">Please select one</option>
@@ -20,7 +23,7 @@
           <colgroup>
             <col>
             <col>
-            <col>
+            <!-- <col> -->
             <col>
             <col>
             <col>
@@ -31,12 +34,7 @@
             <col>
           </colgroup>
           <thead class="sticky top-0 z-10">
-            <tr class="">
-              <!-- <th
-              v-for="(heading, index) in columnHeadings"
-              :key="index" 
-              style="position:sticky; top:3.5rem; background-color:white"
-              > -->
+            <tr>
               <th
               v-for="(heading, index) in columnHeadings"
               :key="index" 
@@ -48,20 +46,20 @@
             </tr>
           </thead>
           <tr
-            v-for="(transaction, index) in sells"
+            v-for="(transaction, index) in sellsReversed"
             :key="transaction.id"
             :class="[index % 2 === 0 ? 'bg-blue-400' : 'bg-blue-200']"
             >
-                <td class="sticky left-0 text-center px-4 bg-black text-white">{{ index + 1 }}</td>
-                <td class="px-4">{{ buys[index].dateTime.slice(0, 19) }}</td>
-                <td class="px-4">{{ transaction.dateTime.slice(0, 19) }}</td>
-                <td class="px-4">{{ buys[index].quantity }}</td>
-                <td class="px-4">{{ buys[index].boughtPrice }}</td>
+                <td class="sticky left-0 text-center px-4 bg-black text-white">{{ reverseIndex(index) }}</td>
+                <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                <td class="px-4">{{ transaction.dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                <!-- <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].quantity }}</td> -->
+                <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].boughtPrice }}</td>
                 <td class="px-4">{{ transaction.sellPrice}}</td>
                 <td class="px-4">{{ transaction.currentPrice }}</td>
-                <td class="px-4">{{ transaction.transactioncalculations.transactionProfitMargin }}</td>
-                <td class="px-4">{{ transaction.transactioncalculations.cumulativeProfitMargin }}</td>
-                <td class="px-4">{{ transaction.transactioncalculations.marketProfitMargin }}</td>
+                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.transactionProfitMargin) }}</td>
+                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.cumulativeProfitMargin) }}</td>
+                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.marketProfitMargin) }}</td>
             </tr>
         </table>
         <span v-else-if="loading && selectedCoin">
@@ -94,7 +92,7 @@ export default {
   data() {
     return {
       TableData: [],
-      columnHeadings: [ 'ID', 'Bought Date/Time', 'Sold Date/Time', 'Quantity', 'Bought Price', 'Sell Price', 'Current Price', 'Transaction Profit Margin', 'Cumulative Profit Margin', 'Market Profit Margin' ],
+      columnHeadings: [ 'ID', 'Buy Date/Time', 'Sold Date/Time', 'Buy Price', 'Sell Price', 'Current Price', 'Transaction Profit Margin', 'Cumulative Profit Margin', 'Market Profit Margin' ],
       selectedCoin: '',
       loading: 0
     }
@@ -110,10 +108,22 @@ export default {
         return index % 2 === 1
       })
     },
+    sellsReversed() {
+      if(this.sells) {
+        let arr = [...this.sells]
+        return arr.reverse()
+      }
+    },
     buys() {
       return this.TableData?.filter((transaction, index) => {
         return index % 2 === 0
       })
+    },
+    buysReversed() {
+      if (this.buys) {
+        let arr = [...this.buys]
+        return arr.reverse()
+      }
     },
     showTable() {
       return this.TableData?.length
@@ -167,21 +177,17 @@ export default {
     filterTransactionsByCoin(array, coin) {
       return array.filter(transaction => transaction.coin.abbrev === coin)
     },
-    // mapProfits(array) {
-    //   return array.filter((transaction, index) => Number(transaction.sellPrice) || index === array.length-1).map(transaction => transaction.transactionProfit)
-      // return array.filter((transaction, index) => Number(transaction.sellPrice) || index === array.length-1)
-    // },
-    // currentTransactionArray(array, transactionIndex, sellPrice, transactionProfit) {
-    //   if (Number(sellPrice) || transactionIndex === array.length-1){
-    //     const transactionArray = array.slice(0, array.indexOf(transactionProfit) + 1)
-    //     const initialValue = 0;
-    //     return transactionArray.reduce(
-    //       (previousValue, currentValue) => previousValue + currentValue,
-    //       initialValue
-    //     );
-    //   }
-    //   return '-'
-    // }
+    reverseIndex(index){
+      return this.sells.length - index
+    },
+    roundedPercentage(decimal) {
+      const percentage = decimal * 100
+      const roundedPercentage = Math.round(percentage * 10000)/10000
+      return roundedPercentage + '%'
+    },
+    reversedBuyIndex(index) {
+      return this.buys > this.sells ? index + 1 : index
+    }
   }
 }
 </script>
