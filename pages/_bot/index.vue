@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-blue-100 h-screen w-full">
-    <Header />
+  <div>
     <h1 class="w-full text-center text-2xl font-bold p-4">
       {{ $route.params.bot }}
     </h1>
@@ -9,14 +8,18 @@
     <div>6/4 I reversed the table so the newest transactions are first</div>
     
     <div class="p-4 w-full">
-      <select v-model="selectedCoin">
+      <select
+        v-model="selectedCoin"
+        class="bg-black"
+        style="background-color: black;"
+      >
         <option disabled value="">Please select one</option>
         <option>BTCUSDT</option>
         <option>LTCUSDT</option>
         <option>ETHUSDT</option>
       </select>
       <div 
-        class="h-96 overflow-y-auto mx-6 bg-blue-100 hide-scrollbar"
+        class="h-96 overflow-y-auto mx-6 hide-scrollbar"
         v-if="showTable"
       >
         <table id="chart" class="relative w-full" v-if="!loading && selectedCoin">
@@ -38,7 +41,7 @@
               <th
               v-for="(heading, index) in columnHeadings"
               :key="index" 
-              class="bg-black text-white"
+              class="bg-black text-white px-4"
               :class="[ index === 0 ? 'sticky left-0' : '']"
               >
                 {{heading}}
@@ -48,18 +51,18 @@
           <tr
             v-for="(transaction, index) in sellsReversed"
             :key="transaction.id"
-            :class="[index % 2 === 0 ? 'bg-blue-400' : 'bg-blue-200']"
+            :class="[index % 2 === 0 ? 'bg-gray-500' : 'bg-black']"
             >
-                <td class="sticky left-0 text-center px-4 bg-black text-white">{{ reverseIndex(index) }}</td>
-                <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].dateTime.slice(5, 16).replace('T', ' ') }}</td>
-                <td class="px-4">{{ transaction.dateTime.slice(5, 16).replace('T', ' ') }}</td>
-                <!-- <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].quantity }}</td> -->
-                <td class="px-4">{{ buysReversed[reversedBuyIndex(index)].boughtPrice }}</td>
-                <td class="px-4">{{ transaction.sellPrice}}</td>
-                <td class="px-4">{{ transaction.currentPrice }}</td>
-                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.transactionProfitMargin) }}</td>
-                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.cumulativeProfitMargin) }}</td>
-                <td class="px-4">{{ roundedPercentage(transaction.transactioncalculations.marketProfitMargin) }}</td>
+                <td class="sticky left-0 py-2 text-center bg-black text-white">{{ reverseIndex(index) }}</td>
+                <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                <td class="py-2 text-center">{{ transaction.dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                <!-- <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].quantity }}</td> -->
+                <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].boughtPrice }}</td>
+                <td class="py-2 text-center">{{ transaction.sellPrice}}</td>
+                <td class="py-2 text-center">{{ transaction.currentPrice }}</td>
+                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.transactionProfitMargin) }}</td>
+                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.cumulativeProfitMargin) }}</td>
+                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.marketProfitMargin) }}</td>
             </tr>
         </table>
         <span v-else-if="loading && selectedCoin">
@@ -69,7 +72,7 @@
     </div>
     <div
         v-if="showLineChart"
-        class="bg-blue-100 w-full px-6"
+        class="w-full px-6"
       >
         <LineChart
           :key="selectedCoin"

@@ -1,21 +1,24 @@
 <template>
-  <div class="bg-black z-50 sticky top-0 text-white w-full flex justify-between py-4 px-8"
+  <div class="z-50 sticky top-0 w-full flex justify-between py-4 px-8"
   >
-    <nuxt-link to="/">
+    <nuxt-link
+      to="/"
+      class="hover:text-neon-green"
+    >
      Home
     </nuxt-link>
     <Dropdown
       :links="botsSansMarketBot"
-      title="Bots" 
+      title="Bots"
     />
     <div 
       v-for="link in links"
       :key="link.title"
-      class=""
     >
       <nuxt-link
         v-if="typeof link.url === 'string'"
         :to="link.url"
+        class="hover:text-neon-green"
       >
         {{ link.title }}
       </nuxt-link>

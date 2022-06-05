@@ -37,7 +37,7 @@ export default {
           plugins: {
             title: {
               display: true,
-              text: this.title,
+              // text: this.title,
               font: {
                 size: 18
               }
@@ -72,8 +72,8 @@ export default {
         datasets: [
           {
             label: this.labelOne,
-            borderColor: '#355E3B',
-            pointBackgroundColor: '#355E3B',
+            borderColor: '#49fb35',
+            pointBackgroundColor: '#49fb35',
             borderWidth: 2,
             pointBorderColor: 'transparent',
             backgroundColor: 'transparent',
@@ -81,8 +81,8 @@ export default {
           },
           {
             label: this.labelTwo,
-            borderColor: '#FF0000',
-            pointBackgroundColor: '#FF0000',
+            borderColor: '#1F51FF',
+            pointBackgroundColor: '#1F51FF',
             borderWidth: 2,
             pointBorderColor: 'transparent',
             backgroundColor: 'transparent',

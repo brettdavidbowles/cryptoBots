@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-blue-100">
-    <Header/>
+  <div>
+    <!-- <Header/> -->
     <div class="p-8">
       <h1 class="text-xl w-full text-center p-4">
         Dr. Jones's Crypto Bots
