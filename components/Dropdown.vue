@@ -22,7 +22,7 @@
       >
         <nuxt-link
           v-if="link.name"
-          :to="link.name"
+          :to="`/${link.name}`"
           class="inline-block w-full"
         >
           {{ link.title }}
