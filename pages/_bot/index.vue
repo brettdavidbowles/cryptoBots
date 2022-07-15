@@ -165,6 +165,9 @@ export default {
           coinAbbrev: this.selectedCoin,
           username: "kenny"
         }
+      },
+      error(errors) {
+        console.log('adfsa')
       }
     }
   },
