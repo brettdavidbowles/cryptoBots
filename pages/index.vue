@@ -3,7 +3,7 @@
     <TitleAnimation class="w-full p-8"/>
     <div class="">
       <p class="p-4">
-        This site tracks the crypto-currency transaction of bots programmed by Dr. Wesley Kenderdine Jones. The bots are currently paper trading. It will be noted when they begin trading live.
+        This site tracks the cryptocurrency transaction of bots programmed by Dr. Wesley Kenderdine Jones. The bots are currently paper trading. It will be noted when they begin trading live.
         <br> 
         <br>
         Dr. Jones uses the Python and the Open AI Gym environement to create autonomous bots to trade cryptocurrencies. The code for this is currently open source and can be found

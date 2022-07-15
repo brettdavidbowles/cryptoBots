@@ -63,8 +63,8 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        // httpEndpoint: 'https://crypto-bots-back.herokuapp.com/graphql'
-        httpEndpoint: 'http://localhost:8000/graphql'
+        httpEndpoint: 'https://crypto-bots-back.herokuapp.com/graphql'
+        // httpEndpoint: 'http://localhost:8000/graphql'
       }
     }
   },
