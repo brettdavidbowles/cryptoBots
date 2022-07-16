@@ -14,15 +14,16 @@
         style="background-color: black;"
       >
         <option disabled value="">Please select one</option>
-        <option>BTCUSDT</option>
-        <option>LTCUSDT</option>
-        <option>ETHUSDT</option>
+        <option 
+          v-for="coin in Coins"
+          :key="coin.abbrev"
+          :value="coin.abbrev"
+        >
+          {{ coin.name }}
+        </option>
       </select>
-      <div 
-        class="h-96 overflow-y-auto mx-6 hide-scrollbar"
-        v-if="showTable"
-      >
-        <table id="chart" class="relative w-full" v-if="!loading && selectedCoin">
+      <div class="h-96 overflow-y-auto mx-6 hide-scrollbar">
+        <table id="chart" class="relative w-full" v-if="showTable">
           <colgroup>
             <col>
             <col>
@@ -89,13 +90,15 @@
 
 <script>
 import { tableData } from '~/apollo/queries/fetchTableData.gql'
+import { coinsByBot } from '~/apollo/queries/fetchCoins.gql'
 import { deleteTransaction } from '~/apollo/mutations/deleteTransaction.gql'
 
 export default {
   data() {
     return {
       TableData: [],
-      columnHeadings: [ 'ID', 'Buy Date/Time', 'Sold Date/Time', 'Buy Price', 'Sell Price', 'Current Price', 'Transaction Profit Margin', 'Cumulative Profit Margin', 'Market Profit Margin' ],
+      Coins: [],
+      columnHeadings: [ 'ID', 'Buy Date/Time', 'Sold Date/Time', 'Buy Price', 'Sell Price', 'Current Price', 'Transaction Profit', 'Cumulative Profit', 'Market Profit' ],
       selectedCoin: '',
       loading: 0
     }
@@ -129,7 +132,7 @@ export default {
       }
     },
     showTable() {
-      return this.TableData?.length
+      return !this.loading && !!this.selectedCoin
     },
     ids() {
       const arr = []
@@ -152,7 +155,7 @@ export default {
       return arr
     },
     showLineChart() {
-      return !this.loading && this.TableData
+      return !this.loading && this.TableData?.length
     }
   },
   apollo: {
@@ -166,8 +169,19 @@ export default {
           username: "kenny"
         }
       },
+      skip() {
+        return !this.selectedCoin
+      },
       error(errors) {
-        console.log('adfsa')
+        console.log(errors)
+      }
+    },
+    Coins: {
+      query: coinsByBot,
+      variables() {
+        return {
+          botName: this.$route.params.bot
+        }
       }
     }
   },

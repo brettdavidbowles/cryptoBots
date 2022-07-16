@@ -46,7 +46,6 @@ export default {
   apollo: {
     botsByUser: {
       query: botsByUser,
-      prefetch: true,
       variables() {
         return {
           username: 'kenny'

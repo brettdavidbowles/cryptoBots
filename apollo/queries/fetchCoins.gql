@@ -1,0 +1,6 @@
+query coinsByBot($botName: String!){
+  Coins: coinsByBot (botName: $botName) {
+    name
+    abbrev
+  }
+}
