@@ -1,7 +1,9 @@
 <script>
 import { Line } from "vue-chartjs/legacy";
 import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(...registerables, zoomPlugin);
 
 export default {
   extends: Line,
@@ -40,6 +42,23 @@ export default {
               // text: this.title,
               font: {
                 size: 18
+              }
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: 'x',
+                pan: {
+                  enabled: true
+                },
+                drag: {
+                  enabled: true
+                }
               }
             }
           },

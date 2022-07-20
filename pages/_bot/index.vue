@@ -3,88 +3,88 @@
     <h1 class="w-full text-center text-2xl font-bold p-4">
       {{ $route.params.bot }}
     </h1>
-    <div>please check my math... profit margins seem wrong but it's late here and will have to wait</div>
-    <div>6/3 i think i fixed them but still hit me up to confirm my methodology</div>
-    <div>6/4 I reversed the table so the newest transactions are first</div>
-    
-    <div class="p-4 w-full">
-      <select
-        v-model="selectedCoin"
-        class="bg-black"
-        style="background-color: black;"
-      >
-        <option disabled value="">Please select one</option>
-        <option 
-          v-for="coin in Coins"
-          :key="coin.abbrev"
-          :value="coin.abbrev"
+    <div class="px-4 w-full">
+      <div class="text-xl mx-8">
+        <span class="mx-4">Coin:</span>
+        <select
+          v-model="selectedCoin"
+          class="bg-black"
+          style="background-color: black;"
         >
-          {{ coin.name }}
-        </option>
-      </select>
-      <div class="h-96 overflow-y-auto mx-6 hide-scrollbar">
-        <table id="chart" class="relative w-full" v-if="showTable">
-          <colgroup>
-            <col>
-            <col>
-            <!-- <col> -->
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-          </colgroup>
-          <thead class="sticky top-0 z-10">
-            <tr>
-              <th
-              v-for="(heading, index) in columnHeadings"
-              :key="index" 
-              class="bg-black text-white px-4"
-              :class="[ index === 0 ? 'sticky left-0' : '']"
+          <option disabled value="">Please select one</option>
+          <option 
+            v-for="coin in Coins"
+            :key="coin.abbrev"
+            :value="coin.abbrev"
+          >
+            {{ coin.name }}
+          </option>
+        </select>
+      </div>
+      <div
+          v-if="showLineChart"
+          class="w-full px-6 pb-12"
+        >
+          <LineChart
+            :key="selectedCoin"
+            :chart-labels="sellDates"
+            :chart-data="transactionProfitMargins"
+            label-one="Bot Cumulative Profit Margin"
+            :chart-data-two="marketProfitMargins"
+            label-two="Market Profit Margin"
+            :title="selectedCoin"
+          />
+      </div>
+      <h2 class="text-xl text-center" v-if="showTable">Transactions</h2>
+      <div class="h-96 overflow-y-auto m-6 hide-scrollbar">
+        <div v-if="showTable">
+          <table id="chart" class="relative w-full" v-if="showTable">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+            <thead class="sticky top-0 z-10">
+              <tr>
+                <th
+                v-for="(heading, index) in columnHeadings"
+                :key="index" 
+                class="bg-black text-white px-4"
+                :class="[ index === 0 ? 'sticky left-0' : '']"
+                >
+                  {{heading}}
+                </th>
+              </tr>
+            </thead>
+            <tr
+              v-for="(transaction, index) in sellsReversed"
+              :key="transaction.id"
+              :class="[index % 2 === 0 ? 'bg-gray-500' : 'bg-black']"
               >
-                {{heading}}
-              </th>
-            </tr>
-          </thead>
-          <tr
-            v-for="(transaction, index) in sellsReversed"
-            :key="transaction.id"
-            :class="[index % 2 === 0 ? 'bg-gray-500' : 'bg-black']"
-            >
-                <td class="sticky left-0 py-2 text-center bg-black text-white">{{ reverseIndex(index) }}</td>
-                <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].dateTime.slice(5, 16).replace('T', ' ') }}</td>
-                <td class="py-2 text-center">{{ transaction.dateTime.slice(5, 16).replace('T', ' ') }}</td>
-                <!-- <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].quantity }}</td> -->
-                <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].boughtPrice }}</td>
-                <td class="py-2 text-center">{{ transaction.sellPrice}}</td>
-                <td class="py-2 text-center">{{ transaction.currentPrice }}</td>
-                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.transactionProfitMargin) }}</td>
-                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.cumulativeProfitMargin) }}</td>
-                <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.marketProfitMargin) }}</td>
-            </tr>
-        </table>
+                  <td class="sticky left-0 py-2 text-center bg-black text-white">{{ reverseIndex(index) }}</td>
+                  <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                  <td class="py-2 text-center">{{ transaction.dateTime.slice(5, 16).replace('T', ' ') }}</td>
+                  <td class="py-2 text-center">{{ buysReversed[reversedBuyIndex(index)].boughtPrice }}</td>
+                  <td class="py-2 text-center">{{ transaction.sellPrice}}</td>
+                  <td class="py-2 text-center">{{ transaction.currentPrice }}</td>
+                  <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.transactionProfitMargin) }}</td>
+                  <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.cumulativeProfitMargin) }}</td>
+                  <td class="py-2 text-center">{{ roundedPercentage(transaction.transactioncalculations.marketProfitMargin) }}</td>
+              </tr>
+          </table>
+        </div>
         <span v-else-if="loading && selectedCoin">
           "I feel the need... the need for speed" - Top Gun
         </span>
       </div>
     </div>
-    <div
-        v-if="showLineChart"
-        class="w-full px-6"
-      >
-        <LineChart
-          :key="selectedCoin"
-          :chart-labels="sellDates"
-          :chart-data="transactionProfitMargins"
-          label-one="Bot Cumulative Profit Margin"
-          :chart-data-two="marketProfitMargins"
-          label-two="Market Profit Margin"
-          :title="selectedCoin"
-        />
-      </div>
   </div>
 </template>
 
@@ -96,7 +96,7 @@ import { deleteTransaction } from '~/apollo/mutations/deleteTransaction.gql'
 export default {
   data() {
     return {
-      TableData: [],
+      // TableData: [],
       Coins: [],
       columnHeadings: [ 'ID', 'Buy Date/Time', 'Sold Date/Time', 'Buy Price', 'Sell Price', 'Current Price', 'Transaction Profit', 'Cumulative Profit', 'Market Profit' ],
       selectedCoin: '',
@@ -105,12 +105,12 @@ export default {
   },
   computed: {
     sortedTransactions() {
-      return this.TableData.sort(function(a, b){
+      return this.TableData.data?.sort(function(a, b){
         return a.id - b.id
       })
     },
     sells() {
-      return this.TableData?.filter((transaction, index) => {
+      return this.TableData?.data?.filter((transaction, index) => {
         return index % 2 === 1
       })
     },
@@ -121,7 +121,7 @@ export default {
       }
     },
     buys() {
-      return this.TableData?.filter((transaction, index) => {
+      return this.TableData?.data?.filter((transaction, index) => {
         return index % 2 === 0
       })
     },
@@ -155,13 +155,20 @@ export default {
       return arr
     },
     showLineChart() {
-      return !this.loading && this.TableData?.length
+      return !this.loading && this.TableData?.data?.length
     }
   },
   apollo: {
     $loadingKey: 'loading',
     TableData: {
       query: tableData,
+      update(data) {
+        if (data?.TableData) {
+          return {
+            data: data.TableData
+          }
+        }
+      },
       variables() {
         return {
           botName: this.$route.params.bot,
