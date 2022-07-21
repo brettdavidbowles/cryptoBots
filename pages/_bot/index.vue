@@ -1,14 +1,19 @@
 <template>
   <div>
-    lets try This
-    {{ Coins }}
-    <NuxtLink 
-      v-for="coin in Coins"
-      :key="coin.abbrev"
-      :to="`${$route.params.bot}/${coin.abbrev}`"
-    >
-      {{ coin.name }}
-    </NuxtLink>
+    <h1 class="text-2xl text-center">{{ $route.params.bot }}</h1>
+    <div class="text-center m-8">
+      <h2>Coins Traded:</h2>
+      <div class="flex flex-col">
+        <NuxtLink 
+          v-for="coin in Coins"
+          :key="coin.abbrev"
+          :to="`${$route.params.bot}/${coin.abbrev}`"
+          class="hover:text-blue-500"
+        >
+          {{ coin.name }}
+        </NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 

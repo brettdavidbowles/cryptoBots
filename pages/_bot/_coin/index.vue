@@ -1,52 +1,21 @@
 <template>
   <div>
     <h1 class="w-full text-center text-2xl font-bold p-4">
-      {{ $route.params.bot }}
+      <NuxtLink :to="`/${$route.params.bot}`" class="hover:text-blue-500">{{ $route.params.bot }}</NuxtLink> - {{ coinName }}
     </h1>
     <div class="px-4 w-full">
-      <div class="text-xl mx-8">
-        <span class="mx-4">Coin:</span>
-        <select
-          v-model="selectedCoin"
-          class="bg-black"
-          style="background-color: black;"
-        >
-          <option disabled value="">Please select one</option>
-          <option 
-            v-for="coin in Coins"
-            :key="coin.abbrev"
-            :value="coin.abbrev"
-          >
-            {{ coin.name }}
-          </option>
-        </select>
-      </div>
-        <!-- {{ sellDates.length }}
-          {{ transactionProfitMargins.length }}
-          {{ marketProfitMargins.length }} -->
-          <!-- {{ showLineChart}} -->
-          
       <div
           v-if="showLineChart"
           class="w-full px-6 pb-12"
         >
-          <!-- <LineChart2
-            :chart-id="`${$route.params.bot}-${selectedCoin}`"
-            :chart-labels="sellDates"
-            :data-set-one="transactionProfitMargins"
-            label-one="Bot Cumulative Profit Margin"
-            :data-set-two="marketProfitMargins"
-            label-two="Market Profit Margin"
-            :title="selectedCoin"
-          /> -->
           <LineChart
-            :key="selectedCoin"
+            :key="$route.params.coin"
             :chart-labels="sellDates"
             :chart-data="transactionProfitMargins"
             label-one="Bot Cumulative Profit Margin"
             :chart-data-two="marketProfitMargins"
             label-two="Market Profit Margin"
-            :title="selectedCoin"
+            :title="$route.params.coin"
           />
       </div>
       <h2 class="text-xl text-center" v-if="showTable">Transactions</h2>
@@ -94,7 +63,7 @@
               </tr>
           </table>
         </div>
-        <span v-else-if="loading && selectedCoin">
+        <span v-else-if="loading">
           "I feel the need... the need for speed" - Top Gun
         </span>
       </div>
@@ -119,12 +88,12 @@ export default {
   },
   computed: {
     sortedTransactions() {
-      return this.TableData.data?.sort(function(a, b){
+      return this.TableData?.sort(function(a, b){
         return a.id - b.id
       })
     },
     sells() {
-      return this.TableData?.data?.filter((transaction, index) => {
+      return this.TableData?.filter((transaction, index) => {
         return index % 2 === 1
       })
     },
@@ -135,7 +104,7 @@ export default {
       }
     },
     buys() {
-      return this.TableData?.data?.filter((transaction, index) => {
+      return this.TableData?.filter((transaction, index) => {
         return index % 2 === 0
       })
     },
@@ -146,7 +115,7 @@ export default {
       }
     },
     showTable() {
-      return !this.loading && !!this.selectedCoin
+      return !this.loading
     },
     ids() {
       const arr = []
@@ -170,8 +139,10 @@ export default {
     },
     showLineChart() {
       return !this.loading 
-        && !!this.TableData?.data?.length
-
+        && !!this.TableData?.length
+    },
+    coinName() {
+      return this.Coins?.find(coin => coin.abbrev === this.$route.params.coin)?.name ? this.Coins?.find(coin => coin.abbrev === this.$route.params.coin)?.name : ''
     }
   },
   apollo: {
@@ -181,12 +152,9 @@ export default {
       variables() {
         return {
           botName: this.$route.params.bot,
-          coinAbbrev: this.selectedCoin,
+          coinAbbrev: this.$route.params.coin,
           username: "kenny"
         }
-      },
-      skip() {
-        return !this.selectedCoin
       },
       error(errors) {
         console.log(errors)
@@ -209,9 +177,6 @@ export default {
           id
         }
       })
-    },
-    filterTransactionsByCoin(array, coin) {
-      return array.filter(transaction => transaction.coin.abbrev === coin)
     },
     reverseIndex(index){
       return this.sells.length - index
