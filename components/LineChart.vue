@@ -86,7 +86,8 @@ export default {
       }
     },
   mounted() {
-    this.renderChart({
+    // this.$nextTick(() => {
+      this.renderChart({
         labels: this.chartLabels,
         datasets: [
           {
@@ -109,6 +110,7 @@ export default {
           }
         ]
       }, this.options)
+    // })
   },
 };
 </script>
