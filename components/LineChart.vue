@@ -1,7 +1,9 @@
 <script>
 import { Line } from "vue-chartjs/legacy";
 import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(...registerables, zoomPlugin);
 
 export default {
   extends: Line,
@@ -41,6 +43,23 @@ export default {
               font: {
                 size: 18
               }
+            },
+            zoom: {
+              zoom: {
+                wheel: {
+                  enabled: true,
+                },
+                pinch: {
+                  enabled: true
+                },
+                mode: 'x',
+                pan: {
+                  enabled: true
+                },
+                drag: {
+                  enabled: true
+                }
+              }
             }
           },
           scales: {
@@ -68,28 +87,28 @@ export default {
     },
   mounted() {
     this.renderChart({
-        labels: this.chartLabels,
-        datasets: [
-          {
-            label: this.labelOne,
-            borderColor: '#49fb35',
-            pointBackgroundColor: '#49fb35',
-            borderWidth: 2,
-            pointBorderColor: 'transparent',
-            backgroundColor: 'transparent',
-            data: this.chartData
-          },
-          {
-            label: this.labelTwo,
-            borderColor: '#1F51FF',
-            pointBackgroundColor: '#1F51FF',
-            borderWidth: 2,
-            pointBorderColor: 'transparent',
-            backgroundColor: 'transparent',
-            data: this.chartDataTwo
-          }
-        ]
-      }, this.options)
+      labels: this.chartLabels,
+      datasets: [
+        {
+          label: this.labelOne,
+          borderColor: '#49fb35',
+          pointBackgroundColor: '#49fb35',
+          borderWidth: 2,
+          pointBorderColor: 'transparent',
+          backgroundColor: 'transparent',
+          data: this.chartData
+        },
+        {
+          label: this.labelTwo,
+          borderColor: '#1F51FF',
+          pointBackgroundColor: '#1F51FF',
+          borderWidth: 2,
+          pointBorderColor: 'transparent',
+          backgroundColor: 'transparent',
+          data: this.chartDataTwo
+        }
+      ]
+    }, this.options)
   },
 };
 </script>
