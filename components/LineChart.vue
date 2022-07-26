@@ -86,31 +86,29 @@ export default {
       }
     },
   mounted() {
-    // this.$nextTick(() => {
-      this.renderChart({
-        labels: this.chartLabels,
-        datasets: [
-          {
-            label: this.labelOne,
-            borderColor: '#49fb35',
-            pointBackgroundColor: '#49fb35',
-            borderWidth: 2,
-            pointBorderColor: 'transparent',
-            backgroundColor: 'transparent',
-            data: this.chartData
-          },
-          {
-            label: this.labelTwo,
-            borderColor: '#1F51FF',
-            pointBackgroundColor: '#1F51FF',
-            borderWidth: 2,
-            pointBorderColor: 'transparent',
-            backgroundColor: 'transparent',
-            data: this.chartDataTwo
-          }
-        ]
-      }, this.options)
-    // })
+    this.renderChart({
+      labels: this.chartLabels,
+      datasets: [
+        {
+          label: this.labelOne,
+          borderColor: '#49fb35',
+          pointBackgroundColor: '#49fb35',
+          borderWidth: 2,
+          pointBorderColor: 'transparent',
+          backgroundColor: 'transparent',
+          data: this.chartData
+        },
+        {
+          label: this.labelTwo,
+          borderColor: '#1F51FF',
+          pointBackgroundColor: '#1F51FF',
+          borderWidth: 2,
+          pointBorderColor: 'transparent',
+          backgroundColor: 'transparent',
+          data: this.chartDataTwo
+        }
+      ]
+    }, this.options)
   },
 };
 </script>
