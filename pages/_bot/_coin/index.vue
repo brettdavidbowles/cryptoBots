@@ -189,12 +189,6 @@ export default {
     reversedBuyIndex(index) {
       return this.buys > this.sells ? index + 1 : index
     }
-  },
-  // watch: {
-  //   selectedCoin() {
-  //     console.log('dsfladksjf')
-  //     this.$refs.lineChart.renderChart()
-  //   }
-  // }
+  }
 }
 </script>
