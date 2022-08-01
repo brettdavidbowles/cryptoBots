@@ -1,4 +1,16 @@
-# cryptoBots
+# The Crypto Bots of Dr. Jones
+
+The frontend of an app to track the cryptocurrency transactions of bots programmed by Dr. Wesley Jones. This project is live and can be found <a href="https://crypto-bots.netlify.app/">here</a>.
+
+## Stack
+<ul>
+  <li><a href="https://vuejs.org/">Vue.js</a></li>
+  <li><a href="https://https://nuxtjs.org/">Nuxt.js</a></li>
+  <li><a href="https://www.apollographql.com/">Apollo GraphQL</a></li>
+  <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+  <li><a href="https://www.chartjs.org/">Chart.js</a></li>
+</ul>
+
 
 ## Build Setup
 
