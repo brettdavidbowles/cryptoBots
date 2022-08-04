@@ -3,7 +3,16 @@
     <h1 class="w-full text-center text-2xl font-bold p-4">
       <NuxtLink :to="`/${$route.params.bot}`" class="hover:text-blue-500">{{ $route.params.bot }}</NuxtLink> - {{ coinName }}
     </h1>
-    <div class="px-4 w-full">
+    <div 
+      v-if="loading"
+      class="w-full text-center h-screen"  
+    >
+      Loading...
+    </div>
+    <div
+      v-else
+      class="px-4 w-full"
+    >
       <div
           v-if="showLineChart"
           class="w-full px-6 pb-12"
@@ -63,9 +72,9 @@
               </tr>
           </table>
         </div>
-        <span v-else-if="loading">
-          "I feel the need... the need for speed" - Top Gun
-        </span>
+        <!-- <div v-else-if="loading">
+          Loading...
+        </div> -->
       </div>
     </div>
   </div>

@@ -8,8 +8,9 @@
      Home
     </nuxt-link>
     <Dropdown
-      :links="botsSansMarketBot"
+      :links="botsByUser"
       title="Bots"
+      :loading="loading"
     />
     <div 
       v-for="link in links"
@@ -44,6 +45,7 @@ export default {
       }
   },
   apollo: {
+    $loadingKey: 'loading',
     botsByUser: {
       query: botsByUser,
       variables() {
@@ -51,11 +53,6 @@ export default {
           username: 'kenny'
         }
       }
-    }
-  },
-  computed: {
-    botsSansMarketBot() {
-      return this.botsByUser.filter(bot => !bot.name.includes('market'))
     }
   }
 }

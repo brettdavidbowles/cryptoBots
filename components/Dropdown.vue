@@ -15,18 +15,23 @@
       class="absolute p-2 -mx-4"
       style="background-color: black;"
     >
-      <div 
-        v-for="link in links"
-        :key="link.url"
-        class="p-2 hover:text-neon-green"
-      >
-        <nuxt-link
-          v-if="link.name"
-          :to="`/${link.name}`"
-          class="inline-block w-full"
+      <div v-if="loading">
+        Loading...
+      </div>
+      <div v-else>
+        <div
+          v-for="link in links"
+          :key="link.url"
+          class="p-2 hover:text-neon-green"
         >
-          {{ link.title }}
-        </nuxt-link>
+          <nuxt-link
+            v-if="link.name"
+            :to="`/${link.name}`"
+            class="inline-block w-full"
+          >
+            {{ link.title }}
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -43,6 +48,10 @@ export default {
     links: {
       type: Array,
       required: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
