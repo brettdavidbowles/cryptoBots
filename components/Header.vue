@@ -41,7 +41,8 @@ export default {
               { title: "About", url: "/about" },
               { title: "Bio", url: "/bio" }
           ],
-          botsByUser: []
+          botsByUser: [],
+          loading: 0
       }
   },
   apollo: {

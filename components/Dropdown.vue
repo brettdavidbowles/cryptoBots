@@ -50,7 +50,7 @@ export default {
       required: true
     },
     loading: {
-      type: Boolean,
+      type: Number,
       default: false
     }
   },

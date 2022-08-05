@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="w-full text-center text-2xl font-bold p-4">
-      <NuxtLink :to="`/${$route.params.bot}`" class="hover:text-blue-500">{{ $route.params.bot }}</NuxtLink> - {{ coinName }}
+      <NuxtLink :to="`/${$route.params.bot}`" class="hover:text-blue-500">{{ botLink }}</NuxtLink> - {{ coinName }}
     </h1>
     <div 
       v-if="loading"
@@ -152,6 +152,9 @@ export default {
     },
     coinName() {
       return this.Coins?.find(coin => coin.abbrev === this.$route.params.coin)?.name ? this.Coins?.find(coin => coin.abbrev === this.$route.params.coin)?.name : ''
+    },
+    botLink() {
+      return `< ${this.$route.params.bot}`
     }
   },
   apollo: {
