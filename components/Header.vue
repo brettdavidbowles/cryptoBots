@@ -1,5 +1,5 @@
 <template>
-  <div class="z-50 sticky top-0 w-full flex justify-between py-4 px-8"
+  <div class="z-50 sticky top-0 w-full flex justify-around py-4 px-8"
   >
     <nuxt-link
       to="/"
