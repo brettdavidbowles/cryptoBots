@@ -72,9 +72,6 @@
               </tr>
           </table>
         </div>
-        <!-- <div v-else-if="loading">
-          Loading...
-        </div> -->
       </div>
     </div>
   </div>
