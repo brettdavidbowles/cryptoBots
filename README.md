@@ -1,6 +1,6 @@
 # The Crypto Bots of Dr. Jones
 
-The frontend of an app to track the cryptocurrency transactions of bots programmed by Dr. Wesley Jones. This project is live and can be found <a href="https://crypto-bots.netlify.app/">here</a>.
+The frontend of an app to track the cryptocurrency transactions of bots programmed by Dr. Wesley Kenderdine Jones. This project is live (albeit, unfinished) and can be found <a href="https://crypto-bots.netlify.app/">here</a>.
 
 ## Stack
 <ul>
