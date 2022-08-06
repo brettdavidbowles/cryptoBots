@@ -1,0 +1,29 @@
+query botHomePage (
+  $botName: String!
+  ){
+    BarChartData: barChartData (
+      botName: $botName
+      username: "kenny"
+      ){
+        id
+        coin {
+          name
+          abbrev
+        }
+        transactioncalculations {
+          transaction {
+            id
+          }
+          cumulativeProfitMargin
+          marketProfitMargin
+      }
+        
+    }
+    Coins: coinsByBot (
+      botName: $botName
+      ){
+      name
+      abbrev
+    }
+
+}
