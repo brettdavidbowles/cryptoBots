@@ -38,8 +38,8 @@ export default {
       return {
           links: [
               // { title: "All Transactions", url: "/allTransactions" },
-              { title: "About", url: "/about" },
-              { title: "Bio", url: "/bio" }
+              { title: "Bio", url: "/bio" },
+              { title: "Contact", url: "/contact" }
           ],
           botsByUser: [],
           loading: 0
