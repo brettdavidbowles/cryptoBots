@@ -1,11 +1,12 @@
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
-// Replace this with your project's endpoint
-const GRAPHCMS_API = 'https://crypto-bots-backend.herokuapp.com/graphql'
+
+// const GRAPH_API = 'https://crypto-bots-backend.herokuapp.com/graphql'
+const GRAPH_API = 'https://web-production-1f52.up.railway.app/graphql'
 
 export default () => ({
-  link: new HttpLink({ uri: GRAPHCMS_API }),
+  link: new HttpLink({ uri: GRAPH_API }),
   cache: new InMemoryCache(),
   defaultHttpLink: false,
 })
